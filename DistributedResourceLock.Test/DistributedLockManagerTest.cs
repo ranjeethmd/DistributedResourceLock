@@ -33,13 +33,13 @@ namespace DistributedResourceLock.Test
             var lockObj = await lockManager.TryAcquireLockAsync("Dummy1", 1);
 
 
-            var task2 = lockManager.TryAcquireLockAsync("Dummy1", 1,1);
+            var nullLock = await lockManager.TryAcquireLockAsync("Dummy1", 1, 1);
 
-            var error = await Record.ExceptionAsync(async () => await task2);
+           
 
             lockObj.Dispose();
 
-            Assert.NotNull(error);
+            Assert.Null(nullLock);
         }
     }
 }

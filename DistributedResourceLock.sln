@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedResourceLock.Lib", "DistributedResourceLock.Lib\DistributedResourceLock.Lib.csproj", "{85AEFC0C-086F-4EDA-A1F3-8DDD51AF4948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedResourceLock.Lib", "DistributedResourceLock.Lib\DistributedResourceLock.Lib.csproj", "{85AEFC0C-086F-4EDA-A1F3-8DDD51AF4948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedResourceLock.Exceptions", "DistributedResourceLock.Exceptions\DistributedResourceLock.Exceptions.csproj", "{11365020-F379-4735-AE5F-14B720223F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedResourceLock.Interfaces", "DistributedResourceLock.Interfaces\DistributedResourceLock.Interfaces.csproj", "{D129A209-11D8-4FD8-B256-B65EAF5B8900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedResourceLock.Interfaces", "DistributedResourceLock.Interfaces\DistributedResourceLock.Interfaces.csproj", "{D129A209-11D8-4FD8-B256-B65EAF5B8900}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedResourceLock.Test", "DistributedResourceLock.Test\DistributedResourceLock.Test.csproj", "{6C24875E-7E0F-43D8-87FD-34507B81A989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedResourceLock.Test", "DistributedResourceLock.Test\DistributedResourceLock.Test.csproj", "{6C24875E-7E0F-43D8-87FD-34507B81A989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{85AEFC0C-086F-4EDA-A1F3-8DDD51AF4948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85AEFC0C-086F-4EDA-A1F3-8DDD51AF4948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85AEFC0C-086F-4EDA-A1F3-8DDD51AF4948}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11365020-F379-4735-AE5F-14B720223F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11365020-F379-4735-AE5F-14B720223F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11365020-F379-4735-AE5F-14B720223F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11365020-F379-4735-AE5F-14B720223F45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D129A209-11D8-4FD8-B256-B65EAF5B8900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D129A209-11D8-4FD8-B256-B65EAF5B8900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D129A209-11D8-4FD8-B256-B65EAF5B8900}.Release|Any CPU.ActiveCfg = Release|Any CPU

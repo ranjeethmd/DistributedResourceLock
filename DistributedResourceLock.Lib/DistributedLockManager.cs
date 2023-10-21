@@ -1,5 +1,4 @@
-﻿using DistributedResourceLock.Exceptions;
-using DistributedResourceLock.Interfaces;
+﻿using DistributedResourceLock.Interfaces;
 using MongoDB.Driver;
 
 namespace DistributedResourceLock.Lib
@@ -54,7 +53,7 @@ namespace DistributedResourceLock.Lib
 
                     if (lockEntity == null)
                     {
-                        return new _Lock(resourceId, _collection,expirationInMins);
+                        return new _Lock(resourceId, _collection, expirationInMins);
                     }
                 }
                 catch (MongoCommandException ex)
@@ -64,7 +63,7 @@ namespace DistributedResourceLock.Lib
                         // Two threads have tried to acquire a lock at the exact same moment on the same key, 
                         // which will cause a duplicate key exception in MongoDB.
                         // So this thread failed to acquire the lock.Ignore
-                       
+
                     }
                 }
 
@@ -72,16 +71,16 @@ namespace DistributedResourceLock.Lib
             }
 
 
-            throw new ResourceLockException($"Unable to acquire resource lock for id :: {resourceId}");
+            return null;
 
         }
 
-        private class _Lock:IDisposable
+        private class _Lock : IDisposable
         {
             private readonly IMongoCollection<LockEntity> _collection;
             private readonly CancellationTokenSource _source;
 
-            public _Lock(string resourceId, IMongoCollection<LockEntity> collection,int windowLength)
+            public _Lock(string resourceId, IMongoCollection<LockEntity> collection, int windowLength)
             {
                 ResourceId = resourceId;
                 _collection = collection;
@@ -92,7 +91,7 @@ namespace DistributedResourceLock.Lib
                 {
                     while (!cancellationToken.IsCancellationRequested)
                     {
-                        
+
                         await _collection.UpdateOneAsync(x => x.ResourceId == resourceId,
                             Builders<LockEntity>.Update.Set(x => x.ExpiresAt,
                                 DateTime.UtcNow + TimeSpan.FromMinutes(windowLength)));
