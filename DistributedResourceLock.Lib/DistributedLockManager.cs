@@ -31,7 +31,7 @@ namespace DistributedResourceLock.Lib
             ));
         }
 
-        public async Task<IDisposable> TryAcquireLockAsync(string resourceId, int expirationInMins, int totalWaitInSec = 10)
+        public async Task<IDisposable?> TryAcquireLockAsync(string resourceId, int expirationInMins, int totalWaitInSec = 10)
         {
             var startTime = DateTime.UtcNow;
 
