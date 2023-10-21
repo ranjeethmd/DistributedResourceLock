@@ -79,10 +79,11 @@ namespace DistributedResourceLock.Lib
         {
             private readonly IMongoCollection<LockEntity> _collection;
             private readonly CancellationTokenSource _source;
+            private readonly string _resourceId;
 
             public _Lock(string resourceId, IMongoCollection<LockEntity> collection, int windowLength)
             {
-                ResourceId = resourceId;
+                _resourceId = resourceId;
                 _collection = collection;
                 _source = new CancellationTokenSource();
                 CancellationToken cancellationToken = _source.Token;
@@ -100,13 +101,10 @@ namespace DistributedResourceLock.Lib
 
                 }, cancellationToken);
             }
-
-            public string ResourceId { get; }
-
             public void Dispose()
             {
                 _source.Cancel();
-                _collection.DeleteOne(x => x.ResourceId == ResourceId);
+                _collection.DeleteOne(x => x.ResourceId == _resourceId);
             }
         }
     }
