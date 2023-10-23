@@ -6,9 +6,7 @@ namespace DistributedResourceLock.Lib
     public class LockEntity
     {
         [BsonId]
-        public ObjectId Id { get; set; }
-        public string ResourceId { get; set; }
-
+        public string Id { get; set; }
         public DateTime ExpiresAt { get; set; }
     }
 }

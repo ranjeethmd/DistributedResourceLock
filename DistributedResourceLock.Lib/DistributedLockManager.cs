@@ -21,14 +21,6 @@ namespace DistributedResourceLock.Lib
                     ExpireAfter = TimeSpan.Zero
                 }
             ));
-
-            _collection.Indexes.CreateOne(new CreateIndexModel<LockEntity>(
-                Builders<LockEntity>.IndexKeys.Ascending(l => l.ResourceId),
-                new CreateIndexOptions
-                {
-                    Unique = true
-                }
-            ));
         }
 
         public async Task<IDisposable?> TryAcquireLockAsync(string resourceId, int expirationInMins, int totalWaitInSec = 10)
@@ -40,9 +32,9 @@ namespace DistributedResourceLock.Lib
                 try
                 {
                     var lockEntity = await _collection.FindOneAndUpdateAsync<LockEntity>(
-                        x => x.ResourceId == resourceId,
+                        x => x.Id == resourceId,
                         Builders<LockEntity>.Update
-                            .SetOnInsert(x => x.ResourceId, resourceId)
+                            .SetOnInsert(x => x.Id, resourceId)
                             .SetOnInsert(x => x.ExpiresAt, DateTime.UtcNow.AddMinutes(expirationInMins)),
                         new FindOneAndUpdateOptions<LockEntity>
                         {
@@ -93,7 +85,7 @@ namespace DistributedResourceLock.Lib
                     while (!cancellationToken.IsCancellationRequested)
                     {
 
-                        await _collection.UpdateOneAsync(x => x.ResourceId == resourceId,
+                        await _collection.UpdateOneAsync(x => x.Id == resourceId,
                             Builders<LockEntity>.Update.Set(x => x.ExpiresAt,
                                 DateTime.UtcNow + TimeSpan.FromMinutes(windowLength)));
                         await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
@@ -104,7 +96,7 @@ namespace DistributedResourceLock.Lib
             public void Dispose()
             {
                 _source.Cancel();
-                _collection.DeleteOne(x => x.ResourceId == _resourceId);
+                _collection.DeleteOne(x => x.Id == _resourceId);
             }
         }
     }
